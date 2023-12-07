@@ -1,0 +1,74 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Register
+{% endblock %}
+
+{% block main %}
+<body>
+    <div class="d-flex justify-content-center">  
+        <div class="col-10 col-md-6 col-xl-4">                
+            <form action="/register" method="POST">
+                <h1 class="mt-4 text-start title text-white">Register</h1>
+                <div class="border border-white border-5 bg-dark bg-opacity-75">
+                    <div class="info">
+                        <b class="">First Name:</b>
+                        <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="first_name" name="first_name" placeholder="First name" value= "{{ first_name }}"type="text">
+                    </div>
+                    <div class="info">
+                        <b class="me-2">Last Name:</b>
+                        <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="last_name" name="last_name" placeholder="Last name" value= "{{ last_name }}" type="text">
+                    </div>
+                    <div class="info">
+                        <b class="me-2">E-mail:</b>
+                        <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="e-mail" name="e-mail" placeholder="E-mail" value= "{{ mail }}" type="text">
+                    </div> 
+                    <div class="info">
+                        <b class="me-2">Age:</b>
+                        <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="age" name="age" placeholder="Age" type="number" min="16" max="99" value= "{{ age }}">
+                    </div>
+                    <div class="info">
+                        <b class="me-2">Gender:</b>
+                        <input type="radio" name="gender" value="male" {% if gender == "male" %} checked {% endif %}> Male
+                        <input type="radio" name="gender" value="female" {% if gender == "female" %} checked {% endif %}> Female
+                    </div>
+
+                    <div class="info">
+                        <b class="me-2"> Level: </b>
+                        1 <input class="me-2" type="radio" name="level" value="1" {% if level == "1" %} checked {% endif %}>
+                        2 <input class="me-2" type="radio" name="level" value="2" {% if level == "2" %} checked {% endif %}>
+                        3 <input class="me-2" type="radio" name="level" value="3" {% if level == "3" %} checked {% endif %}>
+                        4 <input class="me-2" type="radio" name="level" value="4" {% if level == "4" %} checked {% endif %}>
+                        5 <input class="me-2" type="radio" name="level" value="5" {% if level == "5" %} checked {% endif %}>
+                    </div>
+                    <div class="info">
+                        <b class="me-2"> Mix level: </b>
+                        1 <input class="me-2" type="radio" name="mix_level" value="1" {% if level == "1" %} checked {% endif %}> 
+                        2 <input class="me-2" type="radio" name="mix_level" value="2" {% if level == "2" %} checked {% endif %}> 
+                        3 <input class="me-2" type="radio" name="mix_level" value="3" {% if level == "3" %} checked {% endif %}> 
+                        4 <input class="me-2" type="radio" name="mix_level" value="4" {% if level == "4" %} checked {% endif %}> 
+                        5 <input class="me-2" type="radio" name="mix_level" value="5" {% if level == "5" %} checked {% endif %}> 
+                    </div>
+                    <div class="info">
+                        <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="username" name="username" placeholder="Username" type="text">
+                    </div>
+                    <div class="info">
+                        <input class="form-control mx-auto w-auto" id="password" name="password" placeholder="Password" type="password">
+                    </div>
+                    <div class="info">
+                        <input class="form-control mx-auto w-auto" id="confirmation" name="confirmation" placeholder="Repeat Password" type="password">
+                    </div>
+                    <div class="error">
+                        {% if error %}
+                        <div> 
+                            {{ error }}
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+                <button class="btn mt-4 btn-dark" type="submit">Register</button>
+            </form>
+        </div>
+    </div>
+</body>
+{% endblock %}

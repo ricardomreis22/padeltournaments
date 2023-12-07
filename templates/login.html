@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Login
+{% endblock %}
+
+{% block main %}
+<body>
+    <div class="d-flex justify-content-center">  
+        <div class="col-10 col-md-6 col-xl-4">            
+            <form action="/login" method="POST">
+                <h1 class="mt-5 text-start title text-white">Login</h1>
+                <div class="border border-white border-5 bg-dark bg-opacity-75">
+                    <div class="info">
+                    <b>Username:</b>
+                        <input  class="form-control mx-auto w-auto" autocomplete="off" id="username" name="username" placeholder="Username" type="text">
+                    </div>
+                    <div class="info">
+                    <b>Password:</b>
+                        <input  class="form-control mx-auto w-auto" autocomplete="off" id="password" name="password" placeholder="Password" type="password">
+                    </div>
+                    <div class="error">
+                        {% if error %}
+                        <div> 
+                            {{ error }}
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <button class="btn btn-dark" type="submit">Login</button>
+                </div>
+            </form>
+            </div>
+        </div>
+    </div>
+</body>
+{% endblock %}

@@ -1,0 +1,79 @@
+{% extends "layout.html" %}
+
+        {% block title %}
+            New tournament
+        {% endblock %}
+
+{% block main %}
+<!DOCTYPE html>
+<html>
+    <body>
+        <div class="d-flex justify-content-center">  
+            <div class="col-12 col-md-6 col-xl-4">
+                <form action="/new_tournament" method="POST">
+                    <h1 class="mt-5 text-start title text-white"> Create a tournament</h1>
+                    <div class="border mt-4 border-white border-5 bg-dark bg-opacity-75">
+                        <div class="info">
+                            <b>Club:</b>
+                            <div>
+                            <input autocomplete="off" class="text-input mx-1 mt-1 mb-6" id="club" name="club" type="text" value= "{{ club }}">
+                            </div>
+                        </div>
+                        <div class="info">
+                            <b>Level:</b>
+                            <div>
+                                <input  autocomplete="off" class="mt-1 mx-1 mb-6" type="radio" name="level" value="1" {% if level == "1" %} checked {% endif %}> 1
+                                <input  autocomplete="off" class="mx-1 mb-6" type="radio" name="level" value="2" {% if level == "2" %} checked {% endif %}> 2
+                                <input  autocomplete="off" class="mx-1 mb-6" type="radio" name="level" value="3" {% if level == "3" %} checked {% endif %}> 3
+                                <input  autocomplete="off" class="mx-1 mb-6" type="radio" name="level" value="4" {% if level == "4" %} checked {% endif %}> 4
+                                <input  autocomplete="off" class="mx-1 mb-6" type="radio" name="level" value="5" {% if level == "5" %} checked {% endif %}> 5
+                            </div>
+                        </div>
+                        <div class="info">
+                            <b>Gender:</b>
+                            <div>
+                                <input  autocomplete="off" class="mt-1 mx-2" id="gender" type="radio" name="gender" value="male" {% if gender == "male" %} checked {% endif %}> M
+                                <input  autocomplete="off" class="mx-2" id="gender" type="radio" name="gender" value="female" {% if gender == "female" %} checked {% endif %}> F
+                                <input  autocomplete="off" class="mx-2" id="gender" type="radio" name="gender" value="mix" {% if gender == "mix" %} checked {% endif %}> Mx
+                            </div>
+                        </div>
+                        <div class="info">
+                            <b>Slots:</b>
+                            <div>
+                            <input  autocomplete="off" class="text-input mt-1 mx-2" id="slots" name="slots" type="number" min = "4" value= "{{ maximum_slots }}">
+                            </div>
+                        </div>
+                        <div class="info">
+                            <b>Tournament date:</b>
+                            <div>
+                            <input  autocomplete="off" class="text-input mt-1 mx-2" type="date" id="tournament_start" name="tournament_start" value="{{ tournament_date }}">
+                        </div>          
+                        <div class="info">
+                            <b>Subscription date:</b>
+                            <div>
+                            <input  autocomplete="off" class="text-input mt-1 mx-2" type="date" id="subscription" name="subscription" value="{{ subscription_date }}">
+                            </div>
+                        </div>
+                        <div class="info">   
+                            <b>Description:</b>
+                            <div>
+                                <textarea name="description" class="textarea"></textarea>
+                            </div>
+                        <div class="error mb-5">
+                            {% if error %}
+                            <div>
+                                {{ error }} 
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <button class="btn btn-dark" type="submit">Create tournament</button>
+                    </div>   
+                </form>
+            </div>
+        </div>
+    </body>
+</html>
+{% endblock %}
+

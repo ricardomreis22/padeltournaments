@@ -1,0 +1,75 @@
+{% extends "layout.html" %}
+
+{% block main %}
+<!DOCTYPE html>
+<html>
+
+<body>
+    <div class="d-flex justify-content-center">  
+        <div class="col-10 col-md-6 col-xl-4">
+            <h1 class="mt-5 text-start title text-white">Profile</h1>
+            <div class="border border-white border-5 bg-dark bg-opacity-75">
+                <div class="info">
+                    <i class="fa-solid fa-id-card"></i>
+                    <b>First name:</b>
+                    <div>
+                        {{ information["first_name"] }}
+                    </div>
+                </div>
+                <div class="info">
+                    <i class="fa-solid fa-id-card"></i>
+                    <b>Last name:</b>
+                    <div>
+                        {{ information["last_name"] }}
+                    </div>
+                </div>
+                <div class="info">
+                    <i class="fa-solid fa-envelope"></i>
+                    <b>Mail:</b>
+                    <div>
+                        {{ information["mail"] }}
+                    </div>
+                </div>
+                <div class="info">
+                    <i class="fa-solid fa-venus-mars"></i>
+                    <b>Gender:</b>
+                    <div>
+                        {{ information["gender"] }}
+                    </div>
+                </div>
+                <div class="info">
+                    <b>Age:</b>
+                    <div>
+                        {{ information["age"] }}
+                    </div>
+                </div>
+                <div class="info">
+                    <b>Level:</b>
+                    <div>
+                        {{ information["level"] }}
+                    </div>
+                </div>
+                <div class="info">
+                    <b>Mix level:</b>
+                    <div>
+                        {{ information["mix_level"] }}
+                    </div>
+                </div>
+            </div>
+            <div class="mt-4">
+                <a type="submit" href="/update_user"><button class="btn btn-dark"> Update information</button></a>
+            </div>
+            <div class="mt-2">
+                <a type="submit" href="/change_password"><button class="btn btn-dark"> Change password</button></a>
+            </div> 
+            <div class="mt-2">
+                <a type="submit" href="/new_tournament"><button class="btn btn-dark">Create new tournament</button></a>
+            </div>
+        </div> 
+    </div> 
+</body>
+
+</html>
+
+
+{% endblock %}

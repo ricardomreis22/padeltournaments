@@ -1,0 +1,106 @@
+{% extends "layout.html" %}
+
+{% block main %}
+    <!DOCTYPE html>
+    <html>
+    <body>
+        <div class="row d-flex justify-content-center">  
+            <div class="col-12 col-md-8 col-xl-6">
+                <div class="border mt-5 border-white border-5 bg-dark bg-opacity-75">
+                    <div class="info">
+                        <b> Club: </b>
+                        {{ tournament["club"] }}
+                    </div>
+                    <div class="info">
+                        <b> Level: </b>
+                        {{ tournament["level"] }}
+                    </div>
+                    <div class="info">
+                        <b> Gender: </b>
+                        {{ tournament["gender"] }}
+                    </div>
+                    <div class="info">
+                        <b> Slots: </b>
+                        {{ total_players }}/{{ tournament["maximum_slots"] }}
+                    </div>
+                    <div class="info">
+                        <b> Date: </b>
+                        {{ tournament["tournament_date"] }}
+                    </div>
+                    <div class="info">
+                        <b> Register until: </b>
+                        {{ tournament["subscription_date"] }}
+                    </div>
+                </div>
+            </div>        
+            <div class="col-12 col-md-8 col-xl-6">
+                <div class="info mt-5 border border-white border-5 bg-dark bg-opacity-75">
+                    <div class="mb-5">
+                        <h5 class="text mt-3"> Description: </h5>
+                        <textarea readonly cols="80" rows="3" class="textarea"> {{ tournament["description"] }} </textarea>
+                    </div>
+                </div>
+            </div>  
+            <div>      
+                <div class="col-12 col-md-8 col-xl-6">
+                    <div class="info border border-white border-5 bg-dark bg-opacity-75">
+                        <table class="info d-flex justify-content-center">
+                            <tr>
+                                <th>Players</th><th>Teammate</th>
+                            </tr>
+                            {% for player in subscribed_players %}
+                            <tr>
+                                <td> {{ player["player_username"] }}</td> <td> {{ player["partner_username"] }}</td>                
+                            </tr>
+                            {% endfor %}
+                                    {% if maximum_slots <= total_players %}
+                                        <h2>This tournament is full!</h2>
+                                        {% if is_enrolled %}
+                                        <td>
+                                            <form action="{{ url_for('deregister', tournament_id=tournament['id']) }}" method="POST">
+                                            <button class="ms-3 btn btn-sm btn-light" type="submit">Deregister</button>
+                                            </form>
+                                        </td>
+                                        {% endif %}
+                                    {% else %}
+                                        <form action="{{ url_for('info', tournament_id=tournament['id']) }}" method="POST" method="GET">
+                                            {% if not is_enrolled %}
+                                            <td>
+                                                <input class="text-input mb-6" autocomplete="off" id="username" name="username" placeholder="Username" type="text">
+                                            </td>
+                                            <td>
+                                                <input class="text-input mb-6" autocomplete="off" id="teammate_username" name="teammate_username" placeholder="Teammate" type="text">
+                                            </td>
+                                            {% endif %}
+                                        <tr>
+                                            <td>
+                                                <button class="btn btn-sm btn-light" type="submit">Register</button>
+                                            </td>
+                                        </form>
+                                            {% if is_enrolled %}
+                                            <td>
+                                                <form action="{{ url_for('deregister', tournament_id=tournament['id']) }}" method="POST">
+                                                <button class="ms-3 btn btn-sm btn-light" type="submit">Deregister</button>
+                                                </form>
+                                            </td>
+                                            {% endif %}
+                                        </form>
+                                            <div class="error">
+                                                {% if error %}
+                                                <div> 
+                                                    {{ error }}
+                                                </div>
+                                                {% endif %}
+                                            </div>
+                                    
+                                    {% endif %}  
+                        </table>
+                    </div>
+                </div>
+                </div>  
+        </div>
+
+    </body>
+    </html>
+
+{% endblock %}

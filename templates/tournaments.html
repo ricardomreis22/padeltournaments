@@ -1,0 +1,62 @@
+{% extends "layout.html" %}
+
+{% block main %}
+<!DOCTYPE html>
+<html>
+<body>
+    <div class="d-flex justify-content-center">  
+        <div class="col-12 col-lg-8 col-xl-6">
+        <h1 class="title mt-3 text-start title text-white">Tournaments</h1>
+        <div class="tournament border border-white border-5  bg-dark bg-opacity-75">
+            <table class="info m-4">
+                <tr>
+                    <th class="arrow"></th>
+                    <th>Club</th>
+                    <th>Level</th>
+                    <th>Gender</th>
+                    <th class="date">Date</th>
+                    <th class="date">Register</th>
+                    <th>Slots</th>
+                </tr>
+                {% for tournament in tournaments %}
+                <tr>
+                    <td class="data">></td>
+                    <td class="data">{{ tournament["club"] }}</td>
+                    <td class="data">{{ tournament["level"] }}</td>
+                    <td class="data">{{ tournament["gender"] }}</td>
+                    <td class="data">{{ tournament["tournament_date"] }}</td>
+                    <td class="data">{{ tournament["subscription_date"] }}</td>
+                    <td class="data">{{ tournament["n_players"] }} / {{ tournament["maximum_slots"] }}</td>
+                    <td class="dif">
+                        <div class="dropdown">
+                          <button class="btndrop">
+                            <i class="fa-solid fa-caret-down"></i>
+                          </button>
+                          <div class="dropdown-content">
+                            <a href={{ url_for('info', tournament_id=tournament['id']) }}> View </a>
+                            <a href={{ url_for('update', tournament_id=tournament['id']) }}> Update </a>
+                            <a href={{ url_for('delete', tournament_id=tournament['id']) }}>Delete</a>
+                          </div>
+                        </div>
+                    </td>
+                {% endfor %}
+            </table>
+            <div class="error">
+                {% if error %}
+                <div> 
+                    {{ error }}
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        <div class="mt-4">
+            <a type="submit" href="/new_tournament"><button class="btn btn-dark">Create new tournament</button></a>
+        </div>
+        </div>
+    </div>
+</body>
+
+</html>
+
+
+{% endblock %}
