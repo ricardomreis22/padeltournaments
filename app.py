@@ -1,6 +1,7 @@
+import os
+
 from flask import Flask, redirect, render_template, request, session
 from werkzeug.security import check_password_hash
-from flask_session import Session
 
 from datetime import date
 from flask_bootstrap import Bootstrap
@@ -9,10 +10,7 @@ from flask_datepicker import datepicker
 from functions import *
 
 app = Flask(__name__)
-
-app.config["SESSION_PERMANENT"] = False
-app.config["SESSION_TYPE"] = "filesystem"
-Session(app)
+app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY", "dev-secret-key")
 
 Bootstrap(app)
 datepicker(app)
