@@ -1,2 +1,6 @@
-
 2022-08-29 17-49-13.mkv
+__pycache__/
+*.py[cod]
+venv/
+flask_session/
+.env
