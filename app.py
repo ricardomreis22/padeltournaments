@@ -123,19 +123,20 @@ def login():
             error = "Must provide username!"
             return render_template("login.html", error = error)
 
-        # Get user hash
-        user_hash = c.execute('''SELECT hash FROM users WHERE username = ?''', [username]).fetchone()[0]
-
         # Ensure password was submitted
         if not password:
             error = "Must provide password!"
 
         # Ensure username exists and password is correct
-        elif not username in users:
+        elif username not in users:
             error = "Username is not correct!"
 
-        elif check_password_hash(user_hash, password) == False:
-            error = "Password is not correct!"
+        else:
+            user_row = c.execute('''SELECT hash FROM users WHERE username = ?''', [username]).fetchone()
+            if user_row is None:
+                error = "Username is not correct!"
+            elif not check_password_hash(user_row[0], password):
+                error = "Password is not correct!"
 
         if error == "":
             # Remember which user has logged in
