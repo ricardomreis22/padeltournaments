@@ -1,4 +1,4 @@
-from flask import Flask, redirect, render_template, request, session
+from flask import Flask, redirect, render_template, request, send_from_directory, session
 from werkzeug.security import check_password_hash
 from flask_session import Session
 
@@ -17,7 +17,12 @@ Session(app)
 Bootstrap(app)
 datepicker(app)
 
-    
+
+@app.route("/favicon.ico")
+def favicon():
+    return send_from_directory(app.static_folder, "favicon.svg", mimetype="image/svg+xml")
+
+
 @app.route("/", methods=["GET", "POST"])
 def homepage():
     if request.method == "POST":
