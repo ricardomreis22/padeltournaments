@@ -1,10 +1,26 @@
+import os
+import shutil
 import sqlite3
 from flask import session, redirect, render_template
 from functools import wraps
 
 from werkzeug.security import generate_password_hash
 
-db_locale = "database.db"
+
+def _database_path():
+    bundled = os.path.join(os.path.dirname(__file__), "database.db")
+    if os.environ.get("VERCEL") or os.environ.get("AWS_LAMBDA_FUNCTION_NAME"):
+        runtime = "/tmp/database.db"
+        if not os.path.exists(runtime):
+            if os.path.exists(bundled):
+                shutil.copy2(bundled, runtime)
+            else:
+                open(runtime, "a", encoding="utf-8").close()
+        return runtime
+    return os.environ.get("DATABASE_PATH", bundled)
+
+
+db_locale = _database_path()
 connie = sqlite3.connect(db_locale, check_same_thread=False)
 connie.row_factory = sqlite3.Row
 c = connie.cursor()
