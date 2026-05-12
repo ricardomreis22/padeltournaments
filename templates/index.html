@@ -1,8 +1,5 @@
 {% extends "layout.html" %}
 
 {% block main %}
-    <tbody>
-        <img src="1638969955113.jpg" alt="Padel">
-    </tbody>
-
-{% endblock %}  
+    <img src="{{ url_for('static', filename='img/padel.jpg') }}" alt="Padel">
+{% endblock %}

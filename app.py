@@ -9,7 +9,11 @@ from flask_datepicker import datepicker
 
 from functions import *
 
-app = Flask(__name__)
+app = Flask(
+    __name__,
+    static_folder=os.path.join(os.path.dirname(__file__), "public", "static"),
+    static_url_path="/static",
+)
 app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY", "dev-secret-key")
 
 Bootstrap(app)
